@@ -49,3 +49,85 @@ The `Studio` entity has the following properties:
 
 ### 1. Create a Studio (POST)
 
+POST /api/studios
+Content-Type: application/json
+
+{
+"name": "Awesome Studio"
+}
+
+**Response:**
+
+- `201 Created`
+- Location header points to `/api/studios/{id}`
+
+**Example:**
+
+```http
+HTTP/1.1 201 Created
+Location: /api/studios/3f2c9f32-xxxx-xxxx
+
+### 2. Get all Studios (GET)
+
+GET /api/studios
+Response:
+
+200 OK
+
+Returns JSON array of all studios
+
+[
+  {
+    "id": "3f2c9f32-xxxx-xxxx",
+    "name": "Awesome Studio",
+    "createdAt": "2026-01-24T12:00:00Z"
+  }
+]
+
+### 3. Get a Studio by ID (GET)
+GET /api/studios/{id}
+Response:
+
+200 OK → studio found
+
+404 Not Found → if studio does not exist
+
+### 4. Delete a Studio (DELETE)
+
+DELETE /api/studios/{id}
+
+Response:
+
+204 No Content → studio successfully deleted
+
+404 Not Found → if studio does not exist
+
+Running the Project
+
+Clone the repository:
+
+git clone https://github.com/your-username/gameops-dotnet.git
+
+
+Open the solution in Visual Studio 2022/2023
+
+Ensure SQLite NuGet packages are installed
+
+Apply migrations to create the database:
+
+Update-Database
+
+
+Run the API and test endpoints using Swagger or Postman
+
+Notes
+
+The project uses EF Core with SQLite for simplicity. For production, consider MySQL, SQL Server, or PostgreSQL.
+
+Domain logic ensures business rules are enforced before any data is persisted.
+
+Handlers orchestrate operations but do not contain domain rules, keeping DDD principles clean.
+
+License
+
+This project is for educational purposes.
