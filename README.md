@@ -126,6 +126,6 @@ Domain logic ensures business rules are enforced before any data is persisted.
 
 Handlers orchestrate operations but do not contain domain rules, keeping DDD principles clean.
 
-License
+## License
 
 This project is for educational purposes.
