@@ -102,12 +102,11 @@ Response:
 
 404 Not Found → if studio does not exist
 
-Running the Project
+## Running the Project
 
 Clone the repository:
 
 git clone https://github.com/your-username/gameops-dotnet.git
-
 
 Open the solution in Visual Studio 2022/2023
 
@@ -117,10 +116,9 @@ Apply migrations to create the database:
 
 Update-Database
 
-
 Run the API and test endpoints using Swagger or Postman
 
-Notes
+##Notes
 
 The project uses EF Core with SQLite for simplicity. For production, consider MySQL, SQL Server, or PostgreSQL.
 
