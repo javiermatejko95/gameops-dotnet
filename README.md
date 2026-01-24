@@ -63,7 +63,7 @@ Content-Type: application/json
 
 **Example:**
 
-```http
+
 HTTP/1.1 201 Created
 Location: /api/studios/3f2c9f32-xxxx-xxxx
 
