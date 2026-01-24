@@ -106,7 +106,7 @@ Response:
 
 Clone the repository:
 
-git clone https://github.com/your-username/gameops-dotnet.git
+git clone https://github.com/javiermatejko95/gameops-dotnet.git
 
 Open the solution in Visual Studio 2022/2023
 
