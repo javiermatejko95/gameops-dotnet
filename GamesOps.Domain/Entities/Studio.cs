@@ -17,26 +17,26 @@ namespace GamesOps.Domain.Entities
         public string Name { get => name; }
         public DateTime CreatedAt { get => createdAt; }
 
-        public Studio(string studioName)
+        public Studio(string name)
         {
-            if(string.IsNullOrWhiteSpace(studioName))
+            if(string.IsNullOrWhiteSpace(name))
             {
                 throw new DomainException($"Studio name cannot be empty");
             }
 
             id = Guid.NewGuid();
-            name = studioName.Trim();
+            this.name = name.Trim();
             createdAt = DateTime.UtcNow;
         }
 
-        public void Rename(string newStudioName)
+        public void Rename(string name)
         {
-            if (string.IsNullOrWhiteSpace(newStudioName))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new DomainException($"Studio name cannot be empty");
             }
 
-            name = newStudioName.Trim();
+            this.name = name.Trim();
         }
     }
 }
