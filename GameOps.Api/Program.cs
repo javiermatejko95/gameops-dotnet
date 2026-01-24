@@ -1,5 +1,7 @@
 using GameOps.Application.Abstractions;
 using GameOps.Application.Studios.CreateStudio;
+using GameOps.Application.Studios.DeleteStudio;
+using GameOps.Application.Studios.GetStudios;
 using GameOps.Infrastructure.Persistence;
 using GameOps.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,9 @@ builder.Services.AddDbContext<GameOpsDbContext>(options =>
 
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
 builder.Services.AddScoped<CreateStudioHandler>();
+builder.Services.AddScoped<CreateStudioHandler>();
+builder.Services.AddScoped<DeleteStudioHandler>();
+builder.Services.AddScoped<GetStudiosHandler>();
 
 
 var app = builder.Build();

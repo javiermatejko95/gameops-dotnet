@@ -6,5 +6,8 @@ namespace GameOps.Application.Abstractions
     {
         Task AddAsync(Studio studio);
         Task<Studio?> GetByIdAsync(Guid id);
+        Task<List<Studio>> GetAllAsync();
+        Task<bool> ExistsByNameAsync(string name);
+        Task RemoveAsync(Studio studio);
     }
 }

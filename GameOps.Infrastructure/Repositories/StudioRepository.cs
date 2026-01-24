@@ -31,5 +31,16 @@ namespace GameOps.Infrastructure.Repositories
             return await _context.Studios
                 .AnyAsync(s => s.Name == name);
         }
+
+        public async Task<List<Studio>> GetAllAsync()
+        {
+            return await _context.Studios.ToListAsync();
+        }
+
+        public async Task RemoveAsync(Studio studio)
+        {
+            _context.Studios.Remove(studio);
+            await _context.SaveChangesAsync();
+        }
     }
 }

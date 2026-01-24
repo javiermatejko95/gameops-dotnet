@@ -1,5 +1,6 @@
 ﻿using GameOps.Application.Abstractions;
 using GamesOps.Domain.Entities;
+using GamesOps.Domain.Exceptions;
 
 namespace GameOps.Application.Studios.CreateStudio
 {
@@ -14,6 +15,11 @@ namespace GameOps.Application.Studios.CreateStudio
 
         public async Task<Guid> Handle(CreateStudioCommand command)
         {
+            if (await _studioRepository.ExistsByNameAsync(command.Name))
+            {
+                throw new DomainException($"A studio with the name '{command.Name}' already exists.");
+            }
+
             var studio = new Studio(command.Name);
 
             await _studioRepository.AddAsync(studio);
