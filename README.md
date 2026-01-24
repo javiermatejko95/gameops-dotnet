@@ -118,7 +118,7 @@ Update-Database
 
 Run the API and test endpoints using Swagger or Postman
 
-##Notes
+## Notes
 
 The project uses EF Core with SQLite for simplicity. For production, consider MySQL, SQL Server, or PostgreSQL.
 
