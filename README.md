@@ -24,6 +24,7 @@ The project follows **DDD principles**:
   - `CreateStudioHandler` validates and creates a studio.
   - `GetStudiosHandler` retrieves one or all studios.
   - `DeleteStudioHandler` deletes a studio by ID.
+  - `UpdateStudioHandler` updates a studio by ID.
 - **Infrastructure Layer**: Contains database implementations, like `StudioRepository` using **EF Core** to persist studios in SQLite.
 - **API Layer**: Exposes endpoints via **ASP.NET Core Web API**, mapping requests to the appropriate application handlers.
 
