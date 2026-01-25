@@ -9,6 +9,7 @@ The main purpose of this API is to manage `Studio` entities, allowing clients to
 - Create a new studio
 - Retrieve all studios or a studio by ID
 - Delete a studio
+- Update studio
 
 This project is designed to show best practices for structuring .NET applications, handling business rules, and integrating with **EF Core** for data persistence.
 
