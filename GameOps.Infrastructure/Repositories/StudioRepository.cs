@@ -42,5 +42,11 @@ namespace GameOps.Infrastructure.Repositories
             _context.Studios.Remove(studio);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateAsync(Studio studio)
+        {
+            _context.Studios.Update(studio);
+            await _context.SaveChangesAsync();
+        }
     }
 }

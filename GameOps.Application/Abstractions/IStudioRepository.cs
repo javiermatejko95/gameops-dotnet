@@ -9,5 +9,6 @@ namespace GameOps.Application.Abstractions
         Task<List<Studio>> GetAllAsync();
         Task<bool> ExistsByNameAsync(string name);
         Task RemoveAsync(Studio studio);
+        Task UpdateAsync(Studio studio);
     }
 }
