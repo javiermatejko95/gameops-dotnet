@@ -102,6 +102,20 @@ Response:
 
 404 Not Found → if studio does not exist
 
+### 4. Update a Studio (PATCH)
+
+POST /api/studios/{id}
+Content-Type: application/json
+
+{
+"id": "fccf2f5e-dd6c-44c4-8fd4-7d71f82368a5",
+"name": "Awesome Studio"
+}
+
+200 OK → studio updated
+
+500 Error → Studio Name Already exists
+
 ## Running the Project
 
 Clone the repository:
