@@ -1,21 +1,18 @@
 ﻿using GamesOps.Domain.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GamesOps.Domain.Entities
 {
     public class Studio
     {
-        private Guid id;
-        private string name;
-        private DateTime createdAt;
+        private Guid _id;
+        private string _name;
+        private DateTime _createdAt;
+        private List<Game> _games = new();
 
-        public Guid Id { get => id; }
-        public string Name { get => name; }
-        public DateTime CreatedAt { get => createdAt; }
+        public Guid Id { get => _id; }
+        public string Name { get => _name; }
+        public DateTime CreatedAt { get => _createdAt; }
+        public List<Game> Games { get => _games; }
 
         public Studio(string name)
         {
@@ -24,9 +21,9 @@ namespace GamesOps.Domain.Entities
                 throw new DomainException($"Studio name cannot be empty");
             }
 
-            id = Guid.NewGuid();
-            this.name = name.Trim();
-            createdAt = DateTime.UtcNow;
+            _id = Guid.NewGuid();
+            _name = name.Trim();
+            _createdAt = DateTime.UtcNow;
         }
 
         public void Rename(string name)
@@ -36,7 +33,19 @@ namespace GamesOps.Domain.Entities
                 throw new DomainException($"Studio name cannot be empty");
             }
 
-            this.name = name.Trim();
+            this._name = name.Trim();
+        }
+
+        public void AddGame(string name)
+        {
+            if (_games.Any(g => g.Name == name))
+            {
+                throw new DomainException("Game name must be unique per studio");
+            }                
+
+            var newGame = new Game(name);
+
+            _games.Add(newGame);
         }
     }
 }

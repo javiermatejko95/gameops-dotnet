@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GameOps.Infrastructure.Persistence.Configurations
 {
-    public class StudioConfiguration : IEntityTypeConfiguration<Studio>
+    public class GameConfiguration : IEntityTypeConfiguration<Game>
     {
-        public void Configure(EntityTypeBuilder<Studio> builder)
+        public void Configure(EntityTypeBuilder<Game> builder)
         {
-            builder.ToTable("Studios");
+            builder.ToTable("Games");
 
             builder.HasKey(x => x.Id);
 
@@ -18,14 +18,6 @@ namespace GameOps.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.CreatedAt)
                 .IsRequired();
-
-            builder.HasMany(x => x.Games)
-            .WithOne()
-            .HasForeignKey("StudioId")
-            .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Navigation(x => x.Games)
-                .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }
