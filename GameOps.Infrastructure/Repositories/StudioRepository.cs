@@ -35,7 +35,9 @@ namespace GameOps.Infrastructure.Repositories
 
         public async Task<List<Studio>> GetAllAsync()
         {
-            return await _context.Studios.ToListAsync();
+            return await _context.Studios
+                .Include(x => x.Games)
+                .ToListAsync();
         }
 
         public async Task RemoveAsync(Studio studio)
