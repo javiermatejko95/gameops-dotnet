@@ -23,6 +23,7 @@ namespace GameOps.Infrastructure.Repositories
         public async Task<Studio?> GetByIdAsync(Guid id)
         {
             return await _context.Studios
+                .Include(x => x.Games)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -34,7 +35,9 @@ namespace GameOps.Infrastructure.Repositories
 
         public async Task<List<Studio>> GetAllAsync()
         {
-            return await _context.Studios.ToListAsync();
+            return await _context.Studios
+                .Include(x => x.Games)
+                .ToListAsync();
         }
 
         public async Task RemoveAsync(Studio studio)
@@ -45,7 +48,16 @@ namespace GameOps.Infrastructure.Repositories
 
         public async Task UpdateAsync(Studio studio)
         {
-            _context.Studios.Update(studio);
+            // New Games created by Studio.AddGame() are in Detached state.
+            // We must explicitly mark them as Added so EF inserts them into the DB.
+            foreach (var game in studio.Games)
+            {
+                var entry = _context.Entry(game);
+                if (entry.State == EntityState.Detached)
+                {
+                    entry.State = EntityState.Added;
+                }
+            }
             await _context.SaveChangesAsync();
         }
     }

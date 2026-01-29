@@ -1,4 +1,6 @@
-﻿using GameOps.Application.Studios.CreateStudio;
+﻿using GameOps.Api.Contracts.Studios;
+using GameOps.Application.Games.CreateGame;
+using GameOps.Application.Studios.CreateStudio;
 using GameOps.Application.Studios.DeleteStudio;
 using GameOps.Application.Studios.GetStudios;
 using GameOps.Application.Studios.RenameStudio;
@@ -15,16 +17,19 @@ namespace GameOps.Api.Controllers
         private readonly DeleteStudioHandler _deleteHandler;
         private readonly GetStudiosHandler _getHandler;
         private readonly UpdateStudioHandler _updateHandler;
+        private readonly AddGameToStudioHandler _addGameToStudioHandler;
 
         public StudiosController(CreateStudioHandler createHandler, 
             DeleteStudioHandler deleteHandler,
             GetStudiosHandler getHandler,
-            UpdateStudioHandler renameHandler)
+            UpdateStudioHandler renameHandler,
+            AddGameToStudioHandler addGameToStudioHandler)
         {
             _createHandler = createHandler;
             _deleteHandler = deleteHandler;
             _getHandler = getHandler;
             _updateHandler = renameHandler;
+            _addGameToStudioHandler = addGameToStudioHandler;
         }
 
         [HttpPost]
@@ -57,12 +62,20 @@ namespace GameOps.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateStudioCommand command)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateStudioRequest request)
         {
-            if (id != command.Id)
-                return BadRequest("Id mismatch");
+            var udpateStudioCommand = new UpdateStudioCommand(id, request.Name);
 
-            await _updateHandler.Handle(command);
+            await _updateHandler.Handle(udpateStudioCommand);
+            return NoContent();
+        }
+
+        [HttpPost("{studioId}/games")]
+        public async Task<IActionResult> AddGame(Guid studioId, [FromBody] AddGameRequest request)
+        {
+            var addGameToStudioCommand = new AddGameToStudioCommand(studioId, request.Name);
+
+            await _addGameToStudioHandler.Handle(addGameToStudioCommand);
             return NoContent();
         }
     }
