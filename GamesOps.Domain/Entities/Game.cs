@@ -6,13 +6,15 @@ namespace GamesOps.Domain.Entities
     {
         private Guid _id;
         private string _name;
-        private DateTime _createdAt;        
+        private DateTime _createdAt;
+        private Guid _studioId;
 
         public Guid Id { get => _id; }
         public string Name { get => _name; }
-        public DateTime CreatedAt { get => _createdAt; }        
+        public DateTime CreatedAt { get => _createdAt; }   
+        public Guid StudioId {  get => _studioId; }
 
-        public Game(string name)
+        public Game(Guid studioId, string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -22,6 +24,7 @@ namespace GamesOps.Domain.Entities
             _id = Guid.NewGuid();
             _name = name.Trim();
             _createdAt = DateTime.UtcNow;
-        }        
+            _studioId = studioId;
+        }
     }
 }

@@ -7,12 +7,12 @@ namespace GamesOps.Domain.Entities
         private Guid _id;
         private string _name;
         private DateTime _createdAt;
-        private List<Game> _games = new();
+        private readonly List<Game> _games = new();
 
         public Guid Id { get => _id; }
         public string Name { get => _name; }
         public DateTime CreatedAt { get => _createdAt; }
-        public List<Game> Games { get => _games; }
+        public IReadOnlyCollection<Game> Games { get => _games.AsReadOnly(); }
 
         public Studio(string name)
         {
@@ -43,7 +43,7 @@ namespace GamesOps.Domain.Entities
                 throw new DomainException("Game name must be unique per studio");
             }                
 
-            var newGame = new Game(name);
+            var newGame = new Game(_id, name);
 
             _games.Add(newGame);
         }

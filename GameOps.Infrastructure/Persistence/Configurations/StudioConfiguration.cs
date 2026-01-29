@@ -12,20 +12,22 @@ namespace GameOps.Infrastructure.Persistence.Configurations
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Name)
+            builder.Property(s => s.Name)
+                .HasField("_name")
                 .IsRequired()
-                .HasMaxLength(200);
+                .HasMaxLength(100);
 
-            builder.Property(x => x.CreatedAt)
+            builder.Property(s => s.CreatedAt)
+                .HasField("_createdAt")
                 .IsRequired();
 
-            builder.HasMany(x => x.Games)
-            .WithOne()
-            .HasForeignKey("StudioId")
-            .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(s => s.Games)
+                .WithOne()
+                .HasForeignKey(g => g.StudioId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Navigation(x => x.Games)
-                .UsePropertyAccessMode(PropertyAccessMode.Field);
+            builder.Navigation(s => s.Games)
+               .HasField("_games");
         }
     }
 }

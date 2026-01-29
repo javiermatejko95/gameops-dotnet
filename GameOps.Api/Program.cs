@@ -1,4 +1,5 @@
 using GameOps.Application.Abstractions;
+using GameOps.Application.Games.CreateGame;
 using GameOps.Application.Studios.CreateStudio;
 using GameOps.Application.Studios.DeleteStudio;
 using GameOps.Application.Studios.GetStudios;
@@ -26,6 +27,7 @@ builder.Services.AddScoped<CreateStudioHandler>();
 builder.Services.AddScoped<DeleteStudioHandler>();
 builder.Services.AddScoped<GetStudiosHandler>();
 builder.Services.AddScoped<UpdateStudioHandler>();
+builder.Services.AddScoped<AddGameToStudioHandler>();
 
 
 var app = builder.Build();

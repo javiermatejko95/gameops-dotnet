@@ -12,12 +12,19 @@ namespace GameOps.Infrastructure.Persistence.Configurations
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(200);
+            builder.Property(g => g.Id)
+                .HasField("_id");
 
-            builder.Property(x => x.CreatedAt)
-                .IsRequired();
+            builder.Property(g => g.Name)
+                .HasField("_name")
+                .IsRequired()
+                .HasMaxLength(100);
+
+            builder.Property(g => g.CreatedAt)
+                .HasField("_createdAt");
+
+            builder.Property(g => g.StudioId)
+                .HasField("_studioId");
         }
     }
 }
