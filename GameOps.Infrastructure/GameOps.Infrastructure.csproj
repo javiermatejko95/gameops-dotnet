@@ -8,12 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameOps.Application\GameOps.Application.csproj" />
-    <ProjectReference Include="..\GamesOps.Domain\GamesOps.Domain.csproj" />
+    <ProjectReference Include="..\GameOps.Domain\GameOps.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +26,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.SqlServer.Server" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

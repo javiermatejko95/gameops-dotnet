@@ -1,4 +1,4 @@
-﻿using GamesOps.Domain.Entities;
+﻿using GameOps.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameOps.Infrastructure.Persistence

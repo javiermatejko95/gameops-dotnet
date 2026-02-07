@@ -3,6 +3,7 @@ using System;
 using GameOps.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -11,31 +12,35 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameOps.Infrastructure.Migrations
 {
     [DbContext(typeof(GameOpsDbContext))]
-    [Migration("20260129132544_InitialCreate")]
+    [Migration("20260207145107_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.23");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.23")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("GamesOps.Domain.Entities.Game", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GameOps.Domain.Entities.Game", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid>("StudioId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -44,35 +49,35 @@ namespace GameOps.Infrastructure.Migrations
                     b.ToTable("Games", (string)null);
                 });
 
-            modelBuilder.Entity("GamesOps.Domain.Entities.Studio", b =>
+            modelBuilder.Entity("GameOps.Domain.Entities.Studio", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Studios", (string)null);
                 });
 
-            modelBuilder.Entity("GamesOps.Domain.Entities.Game", b =>
+            modelBuilder.Entity("GameOps.Domain.Entities.Game", b =>
                 {
-                    b.HasOne("GamesOps.Domain.Entities.Studio", null)
+                    b.HasOne("GameOps.Domain.Entities.Studio", null)
                         .WithMany("Games")
                         .HasForeignKey("StudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GamesOps.Domain.Entities.Studio", b =>
+            modelBuilder.Entity("GameOps.Domain.Entities.Studio", b =>
                 {
                     b.Navigation("Games");
                 });

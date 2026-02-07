@@ -1,12 +1,5 @@
 ﻿using GameOps.Application.Abstractions;
-using GameOps.Application.Studios.DeleteStudio;
-using GamesOps.Domain.Entities;
-using GamesOps.Domain.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GameOps.Domain.Entities;
 
 namespace GameOps.Application.Studios.GetStudios
 {

@@ -1,6 +1,6 @@
-﻿using GamesOps.Domain.Exceptions;
+﻿using GameOps.Domain.Exceptions;
 
-namespace GamesOps.Domain.Entities
+namespace GameOps.Domain.Entities
 {
     public class Studio
     {

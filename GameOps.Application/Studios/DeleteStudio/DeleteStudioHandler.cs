@@ -1,7 +1,7 @@
 ﻿using GameOps.Application.Abstractions;
 using GameOps.Application.Studios.CreateStudio;
-using GamesOps.Domain.Entities;
-using GamesOps.Domain.Exceptions;
+using GameOps.Domain.Entities;
+using GameOps.Domain.Exceptions;
 
 namespace GameOps.Application.Studios.DeleteStudio
 {

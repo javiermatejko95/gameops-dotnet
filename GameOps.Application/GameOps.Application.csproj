@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GamesOps.Domain\GamesOps.Domain.csproj" />
+    <Folder Include="DTOs\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
+    <ProjectReference Include="..\GameOps.Domain\GameOps.Domain.csproj" />
   </ItemGroup>
 
 </Project>

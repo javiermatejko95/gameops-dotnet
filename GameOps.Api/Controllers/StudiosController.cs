@@ -5,7 +5,6 @@ using GameOps.Application.Studios.DeleteStudio;
 using GameOps.Application.Studios.GetStudios;
 using GameOps.Application.Studios.RenameStudio;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
 
 namespace GameOps.Api.Controllers
 {
