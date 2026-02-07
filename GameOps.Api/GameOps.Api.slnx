@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="../GameOps.Application/GameOps.Application.csproj" Id="57ccc8e0-f27a-4df4-8359-d049be3c2db7" />
+  <Project Path="../GameOps.Domain/GameOps.Domain.csproj" />
   <Project Path="../GameOps.Infrastructure/GameOps.Infrastructure.csproj" Id="7f8da4d9-0ab2-4eab-981e-b2e0c23c7d40" />
-  <Project Path="../GamesOps.Domain/GamesOps.Domain.csproj" Id="4a05a027-8021-4831-aa57-5470cbdeaa61" />
   <Project Path="GameOps.Api.csproj" />
 </Solution>

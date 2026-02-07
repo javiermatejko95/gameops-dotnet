@@ -1,4 +1,4 @@
-using GameOps.Application.Abstractions;
+﻿using GameOps.Application.Abstractions;
 using GameOps.Application.Games.CreateGame;
 using GameOps.Application.Studios.CreateStudio;
 using GameOps.Application.Studios.DeleteStudio;
@@ -13,16 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<GameOpsDbContext>(options =>
-    options.UseSqlite("Data Source=gameops.db"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
-builder.Services.AddScoped<CreateStudioHandler>();
 builder.Services.AddScoped<CreateStudioHandler>();
 builder.Services.AddScoped<DeleteStudioHandler>();
 builder.Services.AddScoped<GetStudiosHandler>();
@@ -32,6 +30,25 @@ builder.Services.AddScoped<AddGameToStudioHandler>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<GameOpsDbContext>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
+
+    try
+    {
+        logger.LogInformation("Applying migrations...");
+        context.Database.Migrate();
+        logger.LogInformation("✅ Migrations applied successfully");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "❌ Error aplying migrations");
+        throw;
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -39,7 +56,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 

@@ -1,0 +1,23 @@
+# Archivos de Visual Studio
+**/.vs
+**/.vscode
+**/*.user
+**/*.suo
+
+# Carpetas de compilación
+**/bin
+**/obj
+
+# Archivos de configuración
+**/.env
+**/.git
+**/.gitignore
+
+# Node modules
+**/node_modules
+
+# Docker
+**/.dockerignore
+**/docker-compose*
+**/*.md
+**/Dockerfile

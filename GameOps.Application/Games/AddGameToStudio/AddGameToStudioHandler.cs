@@ -1,5 +1,5 @@
 ﻿using GameOps.Application.Abstractions;
-using GamesOps.Domain.Exceptions;
+using GameOps.Domain.Exceptions;
 
 namespace GameOps.Application.Games.CreateGame
 {
