@@ -1,8 +1,8 @@
-# Etapa 1: Compilación
+# Stage 1: Compilation
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiar archivos .csproj y restaurar dependencias
+# Copy .csproj files and restore dependencies
 COPY ["GameOps.Api/GameOps.Api.csproj", "GameOps.Api/"]
 COPY ["GameOps.Application/GameOps.Application.csproj", "GameOps.Application/"]
 COPY ["GameOps.Domain/GameOps.Domain.csproj", "GameOps.Domain/"]
@@ -10,18 +10,18 @@ COPY ["GameOps.Infrastructure/GameOps.Infrastructure.csproj", "GameOps.Infrastru
 
 RUN dotnet restore "GameOps.Api/GameOps.Api.csproj"
 
-# Copiar todo el código fuente
+# Copy all source code
 COPY . .
 
-# Compilar el proyecto
+# Compile the project
 WORKDIR "/src/GameOps.Api"
 RUN dotnet build "GameOps.Api.csproj" -c Release -o /app/build
 
-# Etapa 2: Publicación
+# Stage 2: Publish
 FROM build AS publish
 RUN dotnet publish "GameOps.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Etapa 3: Runtime (imagen final)
+# Stage 3: Runtime (final image)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 EXPOSE 80
