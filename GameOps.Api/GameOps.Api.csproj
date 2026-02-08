@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameOps.Application\GameOps.Application.csproj" />
+    <ProjectReference Include="..\GameOps.Contracts\GameOps.Contracts.csproj" />
     <ProjectReference Include="..\GameOps.Infrastructure\GameOps.Infrastructure.csproj" />
   </ItemGroup>
 

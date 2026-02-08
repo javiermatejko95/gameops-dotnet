@@ -1,0 +1,42 @@
+﻿@page "/studios"
+@inject HttpClient Http
+
+<h3>Studios</h3>
+
+@if (studios == null)
+{
+    <p>Loading studios...</p>
+}
+else if (!studios.Any())
+{
+    <p>No studios found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var studio in studios)
+            {
+                <tr>
+                    <td>@studio.Name</td>
+                    <td>@studio.CreatedAt.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<StudioDto>? studios;
+
+    protected override async Task OnInitializedAsync()
+    {
+        studios = await Http.GetFromJsonAsync<List<StudioDto>>("api/studios");
+    }
+}

@@ -7,6 +7,7 @@ COPY ["GameOps.Api/GameOps.Api.csproj", "GameOps.Api/"]
 COPY ["GameOps.Application/GameOps.Application.csproj", "GameOps.Application/"]
 COPY ["GameOps.Domain/GameOps.Domain.csproj", "GameOps.Domain/"]
 COPY ["GameOps.Infrastructure/GameOps.Infrastructure.csproj", "GameOps.Infrastructure/"]
+COPY ["GameOps.Contracts/GameOps.Contracts.csproj", "GameOps.Contracts/"]
 
 RUN dotnet restore "GameOps.Api/GameOps.Api.csproj"
 

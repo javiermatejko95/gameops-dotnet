@@ -1,5 +1,7 @@
 <Solution>
   <Project Path="../GameOps.Application/GameOps.Application.csproj" Id="57ccc8e0-f27a-4df4-8359-d049be3c2db7" />
+  <Project Path="../GameOps.Blazor/GameOps.Blazor.csproj" Id="f9b68e09-88df-47b9-b6fa-53bf65e7d907" />
+  <Project Path="../GameOps.Contracts/GameOps.Contracts.csproj" Id="eb09c1b6-e301-481b-a364-960f884f1ea7" />
   <Project Path="../GameOps.Domain/GameOps.Domain.csproj" />
   <Project Path="../GameOps.Infrastructure/GameOps.Infrastructure.csproj" Id="7f8da4d9-0ab2-4eab-981e-b2e0c23c7d40" />
   <Project Path="GameOps.Api.csproj" />
