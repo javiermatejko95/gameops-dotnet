@@ -1,5 +1,5 @@
 ﻿using GameOps.Application.Abstractions;
-using GameOps.Domain.Entities;
+using GameOps.Contracts.Studios;
 
 namespace GameOps.Application.Studios.GetStudios
 {
@@ -12,14 +12,29 @@ namespace GameOps.Application.Studios.GetStudios
             _studioRepository = studioRepository;
         }
 
-        public async Task<List<Studio>> GetAllAsync()
+        public async Task<List<StudioDto>> GetAllAsync()
         {
-            return await _studioRepository.GetAllAsync();
+            var studios = await _studioRepository.GetAllAsync();
+
+            return studios.Select(studio => new StudioDto
+            {
+                Id = studio.Id,
+                Name = studio.Name,
+                CreatedAt = studio.CreatedAt
+            }).ToList();
         }
 
-        public async Task<Studio?> GetByIdAsync(Guid id)
+        public async Task<StudioDto?> GetByIdAsync(Guid id)
         {
-            return await _studioRepository.GetByIdAsync(id);
+            var studio = await _studioRepository.GetByIdAsync(id);
+            if (studio is null) return null;
+
+            return new StudioDto
+            {
+                Id = studio.Id,
+                Name = studio.Name,
+                CreatedAt = studio.CreatedAt
+            };
         }
     }
 }

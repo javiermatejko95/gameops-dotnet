@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GameOps.Api.Controllers
 {
     [ApiController]
-    [Route("api/studios")]
+    [Route("api/[controller]")]
     public class StudiosController : ControllerBase
     {
         private readonly CreateStudioHandler _createHandler;
