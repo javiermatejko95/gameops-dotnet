@@ -18,7 +18,15 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<GameOpsDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 10,
+                maxRetryDelay: TimeSpan.FromSeconds(5),
+                errorNumbersToAdd: null);
+        }));
 
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
 builder.Services.AddScoped<CreateStudioHandler>();
@@ -36,16 +44,22 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<GameOpsDbContext>();
     var logger = services.GetRequiredService<ILogger<Program>>();
 
-    try
+    var retries = 10;
+    while (retries > 0)
     {
-        logger.LogInformation("Applying migrations...");
-        context.Database.Migrate();
-        logger.LogInformation("✅ Migrations applied successfully");
-    }
-    catch (Exception ex)
-    {
-        logger.LogError(ex, "❌ Error aplying migrations");
-        throw;
+        try
+        {
+            logger.LogInformation("Applying migrations...");
+            context.Database.Migrate();
+            logger.LogInformation("✅ Migrations applied successfully");
+            break;
+        }
+        catch (Exception ex)
+        {
+            retries--;
+            logger.LogWarning(ex, "Database not ready. Retrying...");
+            Thread.Sleep(5000);
+        }
     }
 }
 
