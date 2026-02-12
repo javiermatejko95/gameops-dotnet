@@ -1,36 +1,64 @@
 ﻿@page "/studios"
+@using GameOps.Contracts.Studios
 @inject HttpClient Http
+@inject NavigationManager Nav
 
-<h3>Studios</h3>
+<div class="studios-container">
+    <div class="header">
+        <h1>Studios</h1>
+        <p class="subtitle">Your Library:</p>
+    </div>
 
-@if (studios == null)
-{
-    <p>Loading studios...</p>
-}
-else if (!studios.Any())
-{
-    <p>No studios found.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
+    @if (studios == null)
+    {
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Cargando studios...</p>
+        </div>
+    }
+    else if (!studios.Any())
+    {
+        <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <h2>No Studios Available</h2>
+            <p>No Studios available to Show</p>
+        </div>
+    }
+    else
+    {
+        <div class="studios-grid">
             @foreach (var studio in studios)
             {
-                <tr>
-                    <td>@studio.Name</td>
-                    <td>@studio.CreatedAt.ToString("yyyy-MM-dd")</td>
-                </tr>
+                <div class="studio-card" @onclick="() => GoToDetails(studio.Id)">
+                    <div class="card-image">
+                        <img src="@GetStudioImage(studio.Id)" alt="@studio.Name" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="studio-name">@studio.Name</h3>
+                        <p class="studio-date">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Created at: @studio.CreatedAt.ToString("dd/MM/yyyy")
+                        </p>
+                        <button class="btn-details">
+                            View Games
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-}
+        </div>
+    }
+</div>
 
 @code {
     private List<StudioDto>? studios;
@@ -38,5 +66,15 @@ else
     protected override async Task OnInitializedAsync()
     {
         studios = await Http.GetFromJsonAsync<List<StudioDto>>("api/studios");
+    }
+
+    void GoToDetails(Guid id)
+    {
+        Nav.NavigateTo($"/studios/{id}");
+    }
+
+    string GetStudioImage(Guid studioId)
+    {
+        return $"https://ui-avatars.com/api/?name=Studio&size=400&background=667eea&color=fff";
     }
 }
