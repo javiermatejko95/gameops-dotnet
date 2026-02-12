@@ -1,4 +1,5 @@
 ﻿using GameOps.Application.Abstractions;
+using GameOps.Contracts.Games;
 using GameOps.Contracts.Studios;
 
 namespace GameOps.Application.Studios.GetStudios
@@ -20,7 +21,16 @@ namespace GameOps.Application.Studios.GetStudios
             {
                 Id = studio.Id,
                 Name = studio.Name,
-                CreatedAt = studio.CreatedAt
+                CreatedAt = studio.CreatedAt,
+                Games = studio.Games
+                .Select(game => new GameDto
+                {
+                    Id = game.Id,
+                    Name = game.Name,
+                    CreatedAt = game.CreatedAt,
+                    StudioId = studio.Id,
+                })
+                .ToList()
             }).ToList();
         }
 
@@ -33,7 +43,16 @@ namespace GameOps.Application.Studios.GetStudios
             {
                 Id = studio.Id,
                 Name = studio.Name,
-                CreatedAt = studio.CreatedAt
+                CreatedAt = studio.CreatedAt,
+                Games = studio.Games
+                .Select(game => new GameDto
+                {
+                    Id = game.Id,
+                    Name = game.Name,
+                    CreatedAt = game.CreatedAt,
+                    StudioId = studio.Id,
+                })
+                .ToList()
             };
         }
     }
