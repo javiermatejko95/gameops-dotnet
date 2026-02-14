@@ -15,7 +15,7 @@ namespace GameOps.Application.Games.CreateGame
         public async Task Handle(AddGameToStudioCommand command)
         {
             var studio = await _studioRepository.GetByIdAsync(command.StudioId) 
-                ?? throw new DomainException($"A studio with the name '{command.Name}' doesn't exist.");
+                ?? throw new DomainException($"A studio with the id '{command.StudioId}' doesn't exist.");
 
             studio.AddGame(command.Name);
 

@@ -60,7 +60,7 @@ namespace GameOps.Api.Controllers
             return NoContent();
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("{id:guid}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateStudioRequest request)
         {
             var udpateStudioCommand = new UpdateStudioCommand(id, request.Name);

@@ -48,16 +48,6 @@ namespace GameOps.Infrastructure.Repositories
 
         public async Task UpdateAsync(Studio studio)
         {
-            // New Games created by Studio.AddGame() are in Detached state.
-            // We must explicitly mark them as Added so EF inserts them into the DB.
-            foreach (var game in studio.Games)
-            {
-                var entry = _context.Entry(game);
-                if (entry.State == EntityState.Detached)
-                {
-                    entry.State = EntityState.Added;
-                }
-            }
             await _context.SaveChangesAsync();
         }
     }

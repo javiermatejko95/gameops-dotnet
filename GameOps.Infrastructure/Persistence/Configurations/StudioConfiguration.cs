@@ -12,6 +12,11 @@ namespace GameOps.Infrastructure.Persistence.Configurations
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(s => s.Id)
+            .HasField("_id")
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .ValueGeneratedNever();
+
             builder.Property(s => s.Name)
                 .HasField("_name")
                 .IsRequired()

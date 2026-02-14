@@ -13,7 +13,9 @@ namespace GameOps.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(g => g.Id)
-                .HasField("_id");
+                .HasField("_id")
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .ValueGeneratedNever();
 
             builder.Property(g => g.Name)
                 .HasField("_name")
