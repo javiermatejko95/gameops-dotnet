@@ -131,6 +131,27 @@
     flex-shrink: 0;
 }
 
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-details, .btn-edit, .btn-delete {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .btn-details {
     width: 100%;
     display: flex;
@@ -159,6 +180,205 @@
 .btn-details:hover svg {
     transform: translateX(4px);
 }
+
+/*Add studio card*/
+.add-card {
+    border: 2px dashed #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .add-card:hover {
+        border-color: #764ba2;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        transform: translateY(-5px);
+    }
+
+.add-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+}
+
+.add-icon {
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.add-card h3 {
+    color: #667eea;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.add-card p {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+    .modal-header h2 {
+        margin: 0;
+        color: #1a202c;
+    }
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #718096;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+    .close-btn:hover {
+        color: #1a202c;
+    }
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #1a202c;
+        font-weight: 500;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+.warning-content {
+    text-align: center;
+}
+
+    .warning-content svg {
+        margin-bottom: 1rem;
+    }
+
+    .warning-content p {
+        margin: 0.5rem 0;
+        color: #1a202c;
+    }
+
+.warning-text {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.error-message {
+    color: #e53e3e;
+    background: #fff5f5;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn-cancel, .btn-save, .btn-delete-confirm {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-cancel {
+    background: #e2e8f0;
+    color: #1a202c;
+}
+
+    .btn-cancel:hover {
+        background: #cbd5e0;
+    }
+
+.btn-save {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+    .btn-save:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+.btn-delete-confirm {
+    background: #e53e3e;
+    color: white;
+}
+
+    .btn-delete-confirm:hover:not(:disabled) {
+        background: #c53030;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+    }
+
+    .btn-save:disabled, .btn-delete-confirm:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 
 /* Responsive */
 @media (max-width: 768px) {
